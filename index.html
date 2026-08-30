@@ -898,20 +898,22 @@
 
   function renderTrend() {
     var r7 = getNum('in_roas_7d'), r3 = getNum('in_roas_3d'), rh = getNum('in_roas_hoje');
-    function banda(v) { return v >= 3 ? { label: 'Alto', pts: 2 } : v >= 2.5 ? { label: 'Médio', pts: 1 } : { label: 'Baixo', pts: 0 }; }
+    function banda(v) { return v >= 3 ? { label: 'Alto' } : v >= 2.5 ? { label: 'Médio' } : { label: 'Baixo' }; }
     var b7 = banda(r7), b3 = banda(r3), bh = banda(rh);
-    var score = b7.pts * 0.5 + b3.pts * 0.35 + bh.pts * 0.15;
 
+    // A decisão é guiada pelos últimos 3 dias (o sinal de tendência real), com "hoje" como
+    // desempate só quando os últimos 3 dias já estão ruins. Os últimos 7 dias ficam como contexto:
+    // uma média boa de 7 dias não segura uma queda confirmada em 2 leituras recentes seguidas.
     var decisao, classe, texto;
-    if (score >= 1.5) {
+    if (b3.label === 'Alto') {
       decisao = 'Escalar'; classe = 'escalar';
-      texto = 'Suba o orçamento em degraus de 20–30% a cada 24–48h, priorizando broad + lookalike + públicos de expansão. Evite pular direto pra um orçamento muito maior — isso reinicia o aprendizado do algoritmo.';
-    } else if (score >= 0.5) {
-      decisao = 'Manter'; classe = 'manter';
-      texto = 'Não mexa no orçamento ainda. Observe por mais 48–72h antes de qualquer decisão — um dia isolado ruim (ou bom) não deve decidir sozinho.';
-    } else {
+      texto = 'A tendência dos últimos 3 dias está forte — suba o orçamento em degraus de 20–30% a cada 24–48h, priorizando broad + lookalike + públicos de expansão. Um dia isolado ruim (se for o caso de hoje) não desfaz uma tendência de 3 dias.';
+    } else if (b3.label === 'Baixo' && bh.label === 'Baixo') {
       decisao = 'Reduzir / Pausar'; classe = 'reduzir';
-      texto = 'Reduza o orçamento em 20–30% ou pause os conjuntos com pior CPA. Resolva o gargalo indicado no diagnóstico acima antes de voltar a escalar.';
+      texto = 'Os últimos 3 dias e hoje estão ruins ao mesmo tempo — isso já é tendência, não ruído de um dia isolado, mesmo que os últimos 7 dias ainda pareçam bons. Reduza o orçamento em 20–30% ou pause os conjuntos com pior CPA, e resolva o gargalo indicado no diagnóstico acima antes de voltar a escalar.';
+    } else {
+      decisao = 'Manter'; classe = 'manter';
+      texto = 'Sinal misto: os últimos 3 dias ainda não confirmam uma tendência clara de queda ou de alta. Não mexa no orçamento — observe por mais 48–72h antes de escalar ou reduzir.';
     }
 
     var html = '<div class="trend-bands">' +
