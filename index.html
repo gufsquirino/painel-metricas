@@ -573,11 +573,11 @@
       d7: ['Revisar política de frete/prazo com o fornecedor', 'Medir se a mudança moveu a taxa ATC → Finalização de Compra Iniciada na próxima leitura']
     },
     payment: {
-      hipoteses: ['Formulário de pagamento confuso ou com campos demais', 'Poucas opções de pagamento (falta PIX, só cartão, etc.)', 'Erro técnico no carregamento do checkout'],
-      confirmar: ['Fazer uma compra teste e contar quantos campos/cliques até finalizar', 'Checar no gateway se há erros de carregamento reportados nesse período', 'Testar o checkout em pelo menos 2 aparelhos diferentes (Android/iOS)'],
-      hoje: ['Remover campos não essenciais do formulário de checkout', 'Confirmar que PIX e boleto estão ativos e visíveis, não só cartão'],
-      d3: ['Testar checkout de uma página só, se a plataforma permitir', 'Adicionar indicador de progresso/segurança durante o preenchimento'],
-      d7: ['Acompanhar se a simplificação moveu a taxa Finalização de Compra Iniciada → Inclusões de Info de Pagamento', 'Revisar com o suporte da plataforma se há erros recorrentes de gateway']
+      hipoteses: ['O checkout não transmite confiança na hora de confirmar o pagamento', 'Identidade visual do checkout destoa da loja, e isso faz o cliente desconfiar', 'Faltam provas sociais, selos de segurança ou dados de contato visíveis', 'Se o checkout já passa confiança em tudo isso, o cliente pode estar chegando com dúvida sobre a oferta e travando aqui'],
+      confirmar: ['O checkout passa confiança pra quem chegou até ali?', 'Ele está na mesma identidade visual da loja (cores, logo, fontes)?', 'Ele tem dados de contato visíveis no rodapé (telefone, e-mail, endereço, CNPJ)?', 'Ele tem provas sociais ou selos de segurança (avaliações, selo de compra segura)?', 'Ele tem elementos de conversão — oferta, garantia, troca e devolução garantidas?'],
+      hoje: ['Adicionar dados de contato (telefone/e-mail/CNPJ) no rodapé do checkout, se ainda não tiver', 'Colocar selo de compra segura e/ou avaliações perto do botão de pagamento'],
+      d3: ['Alinhar cores, logo e fontes do checkout com a identidade visual da loja, se a plataforma permitir', 'Deixar garantia e política de troca/devolução visíveis também no checkout, não só na página de produto'],
+      d7: ['Se o checkout já passa confiança em todos os pontos do checklist, o gargalo real está um passo atrás — revisar a oferta/página de produto, porque o cliente pode estar chegando com dúvida', 'Medir se as mudanças de confiança moveram a taxa Finalização de Compra Iniciada → Inclusões de Info de Pagamento na próxima leitura']
     },
     purchase: {
       hipoteses: ['Abandono no último clique por dúvida de última hora (bug ou desconfiança)', 'Erro técnico específico no botão/confirmação final', 'Cliente comparando preço com a concorrência antes de confirmar'],
